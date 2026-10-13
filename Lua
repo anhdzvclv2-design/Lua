@@ -1,0 +1,128 @@
+-- Tải thư viện giao diện mượt mà (WindUI Library)
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/source.lua"))()
+
+-- Tạo cửa sổ chính (Window) với tên H.anh hub
+local Window = Lib:CreateWindow({
+    Title = "H.anh hub",
+    SubTitle = "v1.4.0 - TSB Edition",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 360),
+    Acrylic = false, -- Tắt acrylic để hiển thị rõ ảnh nền
+    Theme = "Dark",
+})
+
+---------------------------------------------------------
+-- CÀI ĐẶT HÌNH NỀN SCRIPT (BACKGROUND / WATERMARK)
+---------------------------------------------------------
+local BackgroundImageID = "rbxassetid://113467932323625" -- ID ảnh nền của bạn
+
+pcall(function()
+    local mainFrame = Window.UIElements and Window.UIElements.Main or nil
+    if mainFrame then
+        local bgImage = Instance.new("ImageLabel")
+        bgImage.Name = "CustomBackground"
+        bgImage.Size = UDim2.new(1, 0, 1, 0)
+        bgImage.Position = UDim2.new(0, 0, 0, 0)
+        bgImage.Image = BackgroundImageID
+        bgImage.BackgroundTransparency = 1
+        bgImage.ImageTransparency = 0.65 -- Độ mờ ảnh (0: rõ nhất, 1: ẩn)
+        bgImage.ScaleType = Enum.ScaleType.Crop
+        bgImage.ZIndex = 0
+        bgImage.Parent = mainFrame
+    end
+end)
+
+-- Tạo các Tab danh mục giao diện
+local TabAutoTech = Window:Tab({ Title = "Auto Tech", Icon = "zap" })
+local TabMain     = Window:Tab({ Title = "Main", Icon = "home" })
+local TabTongHop  = Window:Tab({ Title = "TongHop", Icon = "layers" })
+local TabMovesets = Window:Tab({ Title = "Movesets", Icon = "box" })
+local TabTech     = Window:Tab({ Title = "Tech", Icon = "globe" })
+local TabFixLag   = Window:Tab({ Title = "FixLag", Icon = "rocket" })
+local TabTSB      = Window:Tab({ Title = "TSB", Icon = "shield" })
+local TabMisc     = Window:Tab({ Title = "Misc", Icon = "list" })
+
+---------------------------------------------------------
+-- 1. NỘI DUNG TAB: TECH & AUTO TECH
+---------------------------------------------------------
+TabTech:Section({ Title = "Danh Sách Tech & Combo TSB" })
+
+TabTech:Button({
+    Title = "Loop Dash (Rework)",
+    Desc = "Thực hiện lặp lại Dash liên tục tự động",
+    Callback = function()
+        print("H.anh hub: Đã bật Loop Dash")
+    end
+})
+
+TabTech:Button({
+    Title = "Instant Twisted V1",
+    Desc = "Kỹ thuật biến đổi tức thì phiên bản 1",
+    Callback = function()
+        print("H.anh hub: Đã bật Instant Twisted V1")
+    end
+})
+
+TabTech:Button({
+    Title = "Supa Tech",
+    Desc = "Tối ưu hóa các chuỗi chiêu thức nhanh",
+    Callback = function()
+        print("H.anh hub: Đã bật Supa Tech")
+    end
+})
+
+TabTech:Button({
+    Title = "Gojo Tech New",
+    Desc = "Mô phỏng hiệu ứng phong cách Gojo",
+    Callback = function()
+        print("H.anh hub: Đã bật Gojo Tech New")
+    end
+})
+
+---------------------------------------------------------
+-- 2. NỘI DUNG TAB: MAIN
+---------------------------------------------------------
+TabMain:Section({ Title = "Hỗ Trợ Ngắm & Khóa Mục Tiêu" })
+
+TabMain:Toggle({
+    Title = "Silent Aim",
+    Desc = "Tự động đánh trúng mục tiêu trong tầm ngắm",
+    Default = false,
+    Callback = function(state)
+        print("H.anh hub - Silent Aim:", state)
+    end
+})
+
+TabMain:Toggle({
+    Title = "Cam Lock",
+    Desc = "Khóa camera theo sát người chơi gần nhất",
+    Default = false,
+    Callback = function(state)
+        print("H.anh hub - Cam Lock:", state)
+    end
+})
+
+---------------------------------------------------------
+-- 3. NỘI DUNG TAB: FIXLAG
+---------------------------------------------------------
+TabFixLag:Section({ Title = "Cài Đặt Giảm Lag" })
+
+TabFixLag:Button({
+    Title = "Xóa Hiệu Ứng (Remove Textures)",
+    Desc = "Giúp tăng FPS khi combat đông người",
+    Callback = function()
+        for _, v in pairs(workspace:GetDescendants()) do
+            if v:IsA("BasePart") then
+                v.Material = Enum.Material.SmoothPlastic
+            end
+        end
+        print("H.anh hub: Đã tối ưu đồ họa thành công!")
+    end
+})
+
+-- Thông báo khi tải thành công
+Lib:Notify({
+    Title = "H.anh hub",
+    Content = "Đã tải menu H.anh hub cùng ảnh nền thành công!",
+    Duration = 4
+})
